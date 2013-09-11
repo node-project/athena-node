@@ -1,35 +1,27 @@
 var exec 		= require('child_process').exec;
 var querystring = require('querystring');
 
-function start(response, postData) {
-	console.log("Request handler 'start' was called.");
+function index(request, response) {
 
-	var content = "empty";
-	var html = 	'<html>' + 
-					'<head>' + 
-						'<meta http-equiv="Content-Type" conent="text/html; charset=UTF-89">' + 
-					'</head>' +
-					'<body>' +
-						'<form action="/upload" method="POST">' +
-							'<textarea name="text" rows="20" cols="60"></textarea>' +
-							'<input type="submit" value="Submit text">' +
-						'</form>' +
-					'</body>' +
-				'</html>';
+	console.log("Routing " + request.url + " to index");
+	console.log("Rendering index.html");
+
+	response.render('index',{title:"Index"});
 	
-	response.writeHead(200, {"Content-Type" : "text/html"});
-	response.write(html);
-	response.end();
-	
+	console.log("Rendering successful");	
 }
 
-function upload(response, postData) {
+function upload(request, response) {
 	console.log("Request handler 'upload' was called.");
 
-	response.writeHead(200, {"Content-Type" : "text/html"});
-	response.write("You've sent " + querystring.parse(postData).text);
-	response.end();
+	response.send("You typed : " + request.body.text, 202)
 }
 
-exports.start = start;
-exports.upload = upload;
+function notFound(request, response) {
+	console.log("Request handler 'notFound' was called.");
+	response.send("Not Found!", 404);
+}
+
+exports.index 		= index;
+exports.upload 		= upload;
+exports.notFound 	= notFound;
