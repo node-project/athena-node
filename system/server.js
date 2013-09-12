@@ -5,14 +5,14 @@ var http 	= require("http"),
 	cons 	= require('consolidate');
 
 
-function start(handle, route) {
+function start(route) {
 	app.engine('html', cons.swig);
 	app.set('view engine', 'html');
-	app.set('views', __dirname + "/views");
+	app.set('views', __dirname + "/../application/views");
 	app.use(express.bodyParser());
 	app.use(app.router);
 	
-	route(app, handle);
+	route(app);
 
 	app.listen(8888);
 
