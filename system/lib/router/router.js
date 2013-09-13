@@ -1,17 +1,19 @@
-var Loader = require('../loader/loader');
-var loader = new Loader();
+var Loader 	= require('../loader/loader'),
+	debug 	= require('../../core/core').debug,
+	URI		= require('../uri/uri');
+
+
+var loader 	= new Loader()
+	uri 	= new URI();
+
 function routeController(app) {
-	console.log("Starting router.");
+	debug("Starting router.");
 
-	/*app.get("/", handle.index);
-	app.get("/index", handle.index);
-	app.post("/upload", handle.upload);
-
-	app.get('*', handle.notFound);*/
-
-	app.get("/",loader.loadController);
-	app.get("/:controller",loader.loadController);
-	app.get("/:controller/:method",loader.loadController);
+	app.get(
+		"/*",
+		uri.parseURItoSegments,
+		loader.loadController
+	);
 }
 
 exports.routeController = routeController;

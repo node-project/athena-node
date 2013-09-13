@@ -2,47 +2,121 @@
  * @author Egee Boy Gutierrez
  * @version 1.0
  */
-var fs = require('fs');
-var config = require('../../../application/config/config');
+var fs 		= require('fs'),
+	config 	= require('../../../application/config/config'),
+	debug 	= require('../../core/core').debug;
 
 function Loader(){
 	"user strict";
 
 	this.loadController = function(request, response) {
-		var controllerName 	= request.params.controller;
-		var method			= request.params.method;
-		
-		console.log("Requesting controller " + controllerName);
 
-		if(typeof controllerName == 'undefined') {
-			controllerName = config.controller._default;
+		var segments = request.segments;
+		var directory = '';
 
-			console.log("Requesting default controller " + controllerName);
+		var controllerName 	= "";
+		var method			= "";
+
+		debug("Fetching parsed segments " + segments);
+
+		for(index = 0; index < segments.length - 2; index++){
+			directory += segments[index] + "/";
 		}
 
-		fs.exists("./application/controllers/" + controllerName + ".js", function(exists) {
-			if(exists) {
-				console.log("Controller " + controllerName + " exists");
-				console.log("Loading controller");
+		//check if the second from the last segment is a directory
+		if(segments.length >= 2) {
+			fs.exists("./application/controllers/" + directory + segments[(segments.length - 2)] , function(dirExists){
+				if(dirExists) {
+					directory += segments[(segments.length - 2)] + "/";
 
-				var Controller = require('../../../application/controllers/' + controllerName);
+					//if it is a directory, last segment should be a controller
+					//check to see if the last segment is a controller
+					
+					fs.exists("./application/controllers/" + directory + segments[(segments.length - 1)] + ".js" , function(fileExist) {
+						if(fileExist) {
+							controllerName = segments[(segments.length - 1)];
+							method = "index";
 
-				
+							debug("Controller " + controllerName + " exists");
+							debug("Loading controller");
 
-				if(typeof method == 'undefined') {
-					console.log("Loading default[index] function");
-					method = 'index';
+							var Controller = require('../../../application/controllers/' + directory + controllerName);
+
+							
+
+							if(typeof method == 'undefined') {
+								debug("Loading default[index] function");
+								method = 'index';
+							}
+							
+							controller = new Controller(Loader, method);
+							controller.load(request, response);
+							debug("Done");
+
+						} else {
+							debug("Controller " + controllerName + " does not exist");
+							response.send("Not Found!", 404);
+						}
+					});
+				} else {
+					//check if second from the last segment is a controller
+					fs.exists("./application/controllers/" + directory + segments[(segments.length - 2)] + ".js" , function(fileExist) {
+						if(fileExist) {
+							controllerName = segments[(segments.length - 2)];
+							method = segments[(segments.length - 1)];
+
+							debug("Controller " + controllerName + " exists");
+							debug("Loading controller");
+
+							var Controller = require('../../../application/controllers/' + directory + controllerName);
+
+							
+
+							if(typeof method == 'undefined') {
+								debug("Loading default[index] function");
+								method = 'index';
+							}
+							
+							controller = new Controller(Loader, method);
+							controller.load(request, response);
+							debug("Done");
+						} else {
+							debug("Controller " + controllerName + " does not exist");
+							response.send("Not Found!", 404);
+						}
+					});
 				}
-				
-				controller = new Controller(Loader, method);
-				controller.load(request, response);
-				console.log("Done");
+			});
+		} else {
+			//check to see if the last segment is a controller
+					
+			fs.exists("./application/controllers/" + directory + segments[(segments.length - 1)] + ".js" , function(fileExist) {
+				if(fileExist) {
+					controllerName = segments[(segments.length - 1)];
+					method = "index";
 
-			} else {
-				console.log("Controller " + controllerName + " does not exist");
-				response.send("Not Found!", 404);
-			}
-		});
+					debug("Controller " + controllerName + " exists");
+					debug("Loading controller");
+
+					var Controller = require('../../../application/controllers/' + controllerName);
+
+					
+
+					if(typeof method == 'undefined') {
+						debug("Loading default[index] function");
+						method = 'index';
+					}
+					
+					controller = new Controller(Loader, method);
+					controller.load(request, response);
+					debug("Done");
+
+				} else {
+					debug("Controller " + controllerName + " does not exist");
+					response.send("Not Found!", 404);
+				}
+			});
+		}
 	}
 }
 

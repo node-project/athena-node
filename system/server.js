@@ -2,7 +2,8 @@ var http 	= require("http"),
  	url 	= require("url"),
 	express = require('express'),
 	app 	= express(),
-	cons 	= require('consolidate');
+	cons 	= require('consolidate'),
+	debug 	= require('./core/core').debug;
 
 
 function start(route) {
@@ -11,12 +12,13 @@ function start(route) {
 	app.set('views', __dirname + "/../application/views");
 	app.use(express.bodyParser());
 	app.use(app.router);
+
 	
 	route(app);
 
 	app.listen(8888);
 
-	console.log("Starting server from port 8888");
+	debug("Starting server from port 8888");
 }
 
 exports.start = start;
