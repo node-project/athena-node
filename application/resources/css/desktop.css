@@ -1,0 +1,42 @@
+.desktop-icon {
+	width:74px;
+	margin:2px;
+	/*cursor:default !important;*/
+}
+
+.desktop-icon .icon {
+	margin:0 auto !important;
+	width:47px;
+	height:35px;
+	background:transparent;
+	margin:10px 10px 0 10px !important;
+	opacity:1 !important;
+	cursor:default !important;
+}
+
+.d-icon {
+	/*cursor:default !important;*/
+}
+
+.desktop-icon .label{
+	color: #fff;
+	font-size:12px;
+	line-height:12px;
+	margin-top:5px;
+	margin-bottom:10px;
+	opacity:1 !important;
+	text-align:center !important;
+	width:74px;
+	height:25px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	/*cursor:default !important;*/
+}
+
+.desktop-icon:hover,.desktop-icon-selected {
+	box-shadow			: inset  0 0 20px #fff;
+	-moz-box-shadow		: inset 0 0 10px #fff;
+   -webkit-box-shadow	: inset 0 0 10px #fff;
+   /*cursor:default !important;*/
+}

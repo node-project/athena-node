@@ -1,0 +1,20 @@
+.system_tray{	
+	height:100%; 
+	padding-right:5px;
+	color:white;
+	
+}
+
+.system_tray div {
+	font-size:12px;
+	line-height:18px;
+}
+
+.system_tray .logout {
+	margin-top:6px; 
+	margin-right:5px;
+}
+.system_tray .logout img {
+	width:25px; 
+	height:25px;
+}

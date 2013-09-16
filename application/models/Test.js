@@ -19,11 +19,13 @@ function Test() {
 				if(err) throw err;
 				debug("Opening mongo client");
 
-				db.collection('test').findOne({}, function(err, doc) {
+				db.collection('user').findOne({}, function(err, doc) {
 
 					if(err) throw err;
 
 					callback(doc);
+
+					dbClient.close();
 
 				});
 			});

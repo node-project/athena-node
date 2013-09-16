@@ -1,0 +1,57 @@
+<head>
+	<title>{{title}}</title>
+
+	<meta charset="utf-8">
+	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+
+	<meta name="author" content="www.druidinc.com">
+	
+
+	<meta http-equiv="cleartype" content="on">
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/default/default.css" media="all">
+	<link rel="stylesheet" href="/css/default/col.css" media="all">
+	<link rel="stylesheet" href="/css/default/2cols.css" media="all">
+	<link rel="stylesheet" href="/css/default/3cols.css" media="all">
+	<link rel="stylesheet" href="/css/default/4cols.css" media="all">
+	<link rel="stylesheet" href="/css/default/5cols.css" media="all">
+	<link rel="stylesheet" href="/css/default/6cols.css" media="all">
+	<link rel="stylesheet" href="/css/default/7cols.css" media="all">
+	<link rel="stylesheet" href="/css/default/8cols.css" media="all">
+	<link rel="stylesheet" href="/css/default/9cols.css" media="all">
+	<link rel="stylesheet" href="/css/default/10cols.css" media="all">
+	<link rel="stylesheet" href="/css/default/11cols.css" media="all">
+	<link rel="stylesheet" href="/css/default/12cols.css" media="all">
+
+	<!-- Responsive Stylesheets -->
+	<link rel="stylesheet" media="only screen and (max-width: 1024px) and (min-width: 769px)" href="/css/default/1024.css">
+	<link rel="stylesheet" media="only screen and (max-width: 768px) and (min-width: 481px)" href="/css/default/768.css">
+	<link rel="stylesheet" media="only screen and (max-width: 480px)" href="/css/default/480.css">
+	
+	<script type="text/javascript" src="/javascript/ext/bootstrap.js"></script>
+	<script type="text/javascript" src="/javascript/app/app.js"></script>
+	<script type="text/javascript" src="/javascript/app/helper.js"></script>
+	
+	
+	{% if page == 'login' %}
+		<link rel="stylesheet" href="/css/login.css" media="all">
+		<script type="text/javascript" src="/javascript/app/login.js"></script>
+	{% elseif page == 'desktop' %}
+		<link rel="stylesheet" href="/css/taskbar.css" media="all">
+		<link rel="stylesheet" href="/css/desktop.css" media="all">
+		<link rel="stylesheet" href="/css/chat.css" media="all">
+		<link rel="stylesheet" href="/css/mail.css" media="all">
+		<link rel="stylesheet" href="/css/ticket.css" media="all">
+		
+		<script type="text/javascript" src="/javascript/app/desktop.js"></script>
+		<script type="text/javascript" src="/javascript/app/startmenu.js"></script>
+		<script type="text/javascript" src="/javascript/app/taskbar.js"></script>
+	{% endif %}
+	
+	
+</head>

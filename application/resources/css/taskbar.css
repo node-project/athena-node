@@ -1,0 +1,28 @@
+@import 'middle_taskbar.css';
+@import 'system_tray.css';
+
+.task_bar {
+	position: fixed;
+	bottom: 0;
+	height: 38px;
+	background: url('../image/taskbar.png') repeat-x scroll 100%;
+}
+
+.task_bar .start-menu-icon {
+	width:50px;
+	height:100%;
+	float:left;
+}
+
+.task_bar .start-menu-icon img {
+	width:40px;
+	height:100%;
+	margin-left: 5px;
+	margin-top:2px;
+}
+
+.start_menu_items {
+	z-index:1000;
+	position:fixed;
+	bottom:38px;
+}

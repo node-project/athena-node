@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+	{% include "_shared/_head.html" %}
+	<body>
+		<div id="wrapper">
+			<div id="headcontainer">
+							
+			</div>
+			
+			<div id="maincontentcontainer">
+				<div class="login_container" id="login_container">					
+					
+					<div class="section group">
+						<div class="login_body center">
+							<div class="section group">
+								<img src="/image/login/picture_box.png">
+							</div>
+							<div class="section group">
+								<form method="post">
+									<div class="section group  ">
+										<div class="col span_10_of_11 float_left"><input type="text" name="username" placeholder="Username" value="{{username}}"/></div>
+										<div class="col  span_1_of_11 float_left">&nbsp;</div>
+									</div>
+									<div class="section group ">
+										<div class="col  span_10_of_11 float_left"><input type="password" name="password" placeholder="Password" value="{{password}}"/></div>
+										<input type="hidden" name="token" value="{{token}}"/>
+										<div class="col  span_1_of_11 float_left"><input type="image" src="/image/login/login.png" name="login"/></div>
+									</div>									
+								</form>
+							</div>
+							<div class="section group">
+								<div class="col span_2_of_2">{{load_errors}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footercontainer">
+				<div class="login_logo_container" id="login_logo_container">
+					<img src="/image/logo.png">
+				</div>	
+			</div>
+		</div>		
+	</body>
+	{% include "_shared/_foot.html" %}
+</html>

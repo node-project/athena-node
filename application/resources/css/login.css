@@ -1,0 +1,48 @@
+.login_container{
+	
+	display:none;
+	position:fixed;
+}
+
+
+
+.login_body {
+	padding: 25px;
+}
+
+.login_body  .label{
+	padding-top:8px;
+}
+
+.login_body  input[type=image] {
+	margin-left: 8px;
+	margin-top: 6px;
+	height: 25px;
+	width: 25px;
+}
+
+.login_body  input[type=reset]{
+	padding:5px 10px 5px 10px;
+	border:1px solid #2d89ef;
+	background:#2d89ef;
+	color: #fff;
+	
+}
+
+.login_body  input[type=reset] {
+	margin-left:5px;
+	margin-right:5px;
+}
+
+.login_body   input{
+	width:100%;
+}
+
+.login_logo_container {
+	position:absolute;
+	bottom: 10px;
+}
+
+.login_logo_container img{
+	width:200px;
+}

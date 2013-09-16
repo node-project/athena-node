@@ -21,7 +21,12 @@ function Start(loader) {
 					docs = doc;
 
 					debug("passing response");
-					loader.loadView('index', {title : "Index", doc:JSON.stringify(docs)}, response);
+					var params = {
+						title 	: "Index",
+						doc 	: JSON.stringify(docs),
+						page 	: "login"
+					};
+					loader.loadView('Login', params, response);
 				});
 			});
 
