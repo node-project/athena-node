@@ -6,25 +6,34 @@
 
 var debug 	= require('../../system/core/core').debug;
 
-function Start(loader, method) {
+function Start(loader) {
 	"use strict";
 
-	var _method = {};
+	var _method = {
+		"index"		:  function(request, response){
+			var result = '';
+			var docs = '';
 
-	_method["index"] = function(request, response){
-		debug("Loading index function");
+			debug("Loading index function");
 
-		response.render('index', {title : "Index"});
-	}
+			var model = loader.loadModel("Test", function(model) {
+				model["test"](function(doc){
+					docs = doc;
 
-	this.load = function(request, response){
-		if(_method[method]) {
-			_method[method](request, response);
-		} else {
-			debug("Method does not exist");
-			response.send("Not Found!", 404);
+					debug("passing response");
+					loader.loadView('index', {title : "Index", doc:JSON.stringify(docs)}, response);
+				});
+			});
+
+		},
+		"upload" : function(request, response){
+			var text = request.body.text;
+
+			loader.loadView('./upload/upload', {title : "Index", text:text}, response);
 		}
-	}
+	};
+
+	return _method;
 }
 
 module.exports = Start;

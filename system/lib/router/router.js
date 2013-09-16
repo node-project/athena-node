@@ -9,7 +9,7 @@ var loader 	= new Loader()
 function routeController(app) {
 	debug("Starting router.");
 
-	app.get(
+	app.all(
 		"/*",
 		uri.parseURItoSegments,
 		loader.loadController
