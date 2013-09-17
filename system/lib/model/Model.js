@@ -7,27 +7,19 @@
 var config 	= require('../../../application/config/config'),
 	debug 	= require('../../core/core').debug;
 
-function Model() {
+function Model(dbclient, schemaObj, modelName) {
 
-	var MongoClient = require('mongodb').MongoClient,
-		Server = require('mongodb').Server;
+	var schema = dbclient.Schema(schemaObj);
+	var model;
 
-	var mongoclient = new MongoClient( new Server(config.database.host, config.database.port, { 'native_parser' : true}) );
+	try {
+		model = dbclient.model(modelName, schema);
+	} catch(error) {
+		model = dbclient.model(modelName);
+	}
 
-	debug("MongoDB Client connected");
 
-	//var dbconn = mongoclient.db(config.database.dbname);
-
-	/*mongoclient.open(function (err, mongoclient){
-
-		if(err) throw err;
-
-		app.listen(8080);
-
-		console.log("Server started"); 
-	});*/
-
-	return mongoclient;
+	return model;
 }
 
 module.exports = Model;

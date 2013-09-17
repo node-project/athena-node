@@ -12,6 +12,6 @@ module.exports = exports = {
 	"database" : {
 		"host" : "localhost",
 		"port" : 27017,
-		"dbname" : "test"
+		"dbname" : "athena"
 	}
 };

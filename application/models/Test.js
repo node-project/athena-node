@@ -6,28 +6,31 @@
 
 var debug 		= require('../../system/core/core').debug,
 	Model		= require('../../system/lib/model/Model'),
-	dbClient 	= new Model(),
-	db 			= dbClient.db("test");
+	model;
 
-function Test() {
+function Test(dbclient) {
 	"use strict";
 
+	var schema = {	
+		name 		: String,
+		lastname 	: String 
+	};
+
+	var modelName = "user";
+
+	model = new Model(dbclient, schema, modelName);
+
+	var test = new model({
+		name 	: "Egee Boy",
+		lastname: "Gutierrez"
+	});
+
 	var _method = {
-		"test"		:  function(callback){
-			dbClient.open(function (err, dbClient){
+		"save"		:  function(callback){
+			test.save( function(err, test) {
+				if(err) callback(err, null);
 
-				if(err) throw err;
-				debug("Opening mongo client");
-
-				db.collection('user').findOne({}, function(err, doc) {
-
-					if(err) throw err;
-
-					callback(doc);
-
-					dbClient.close();
-
-				});
+				callback(null, test);
 			});
 		}
 	};

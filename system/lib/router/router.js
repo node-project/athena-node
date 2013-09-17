@@ -3,11 +3,13 @@ var Loader 	= require('../loader/loader'),
 	URI		= require('../uri/uri');
 
 
-var loader 	= new Loader()
+var loader,
 	uri 	= new URI();
 
-function routeController(app) {
+function routeController(app, dbclient) {
 	debug("Starting router.");
+	
+	loader = new Loader(dbclient);
 
 	app.all(
 		"/*",

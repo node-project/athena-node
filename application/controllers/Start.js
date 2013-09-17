@@ -16,19 +16,12 @@ function Start(loader) {
 
 			debug("Loading index function");
 
-			var model = loader.loadModel("Test", function(model) {
-				model["test"](function(doc){
-					docs = doc;
-
-					debug("passing response");
-					var params = {
-						title 	: "Index",
-						doc 	: JSON.stringify(docs),
-						page 	: "login"
-					};
-					loader.loadView('Login', params, response);
-				});
-			});
+			var params = {
+				title 	: "Index",
+				page 	: request.session.user_id ? "desktop" : "login"
+			};
+			
+			loader.loadView(request.session.user_id ? 'Desktop' : 'Login', params, response);
 
 		},
 		"upload" : function(request, response){

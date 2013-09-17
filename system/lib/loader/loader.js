@@ -5,7 +5,7 @@
 var fs 		= require('fs'),
 	debug 	= require('../../core/core').debug;
 
-function Loader(){
+function Loader(dbclient){
 	"user strict";
 
 	var me = this;
@@ -168,7 +168,7 @@ function Loader(){
 							var Model = require('../../../application/models/' + directory + modelName);
 
 							
-							model = new Model();
+							model = new Model(dbclient);
 							callback(model);
 							
 							debug("Done");
@@ -193,7 +193,7 @@ function Loader(){
 					var Model = require('../../../application/models/' + directory + modelName);
 
 					
-					model = new Model();
+					model = new Model(dbclient);
 					callback(model);
 					debug("Done");
 

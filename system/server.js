@@ -4,25 +4,43 @@ var http 	= require("http"),
 	app 	= express(),
 	cons 	= require('consolidate'),
 	path 	= require('path'),
-	debug 	= require('./core/core').debug;
+	mongoose = require('mongoose'),
+	debug 	= require('./core/core').debug,
+	appConfig 	= require("../application/config/config");
 
 
 function start(route) {
-	app.engine('html', cons.swig);
-	app.set('view engine', 'html');
-	app.set('views', __dirname + "/../application/views");
-	app.use('/css',express.static(path.join(__dirname, '/../application/resources/css')));
-	app.use('/image',express.static(path.join(__dirname, '/../application/resources/images')));
-	app.use('/javascript',express.static(path.join(__dirname, '/../application/resources/javascript')));
-	app.use(express.bodyParser());
-	app.use(app.router);
+	var host = appConfig.database.host;
+	var port = appConfig.database.port;
+	var dbname = appConfig.database.dbname;
 
+	mongoose.connect('mongodb://' + host + ':' + port + '/' + dbname);
 	
-	route(app);
+	var db = mongoose.connection;
 
-	app.listen(8888);
+	db.on('error', console.error.bind(console, 'connection error:'));
+	db.once('open', function callback () {
+		app.use(express.cookieParser());
+		app.use(express.session({secret: '1234567890QWERTY'}));
 
-	debug("Starting server from port 8888");
+	  	app.engine('html', cons.swig);
+		app.set('view engine', 'html');
+		app.set('views', __dirname + "/../application/views");
+		app.use('/css',express.static(path.join(__dirname, '/../application/resources/css')));
+		app.use('/image',express.static(path.join(__dirname, '/../application/resources/images')));
+		app.use('/javascript',express.static(path.join(__dirname, '/../application/resources/javascript')));
+		app.use(express.bodyParser());
+		app.use(app.router);
+
+		
+		route(app, mongoose);
+
+		app.listen(8888);
+
+		
+		debug("Starting server from port 8888");
+	});
+	
 }
 
 exports.start = start;
