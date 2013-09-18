@@ -37,11 +37,11 @@ function DesktopIcons(loader) {
 			
 
 			var model = loader.loadModel("DesktopIcons", function(model){
-				model["setDesktopIconPosition"]( request.session.user_id, icon_id, position, function(err, data) {
+				model["setDesktopIconPosition"]( request.session.user_id, icon_id, position, function(err, numAffected, raw) {
 					if(err) throw err;
-
+					debug(JSON.stringify(raw));
 					response.writeHead(200, {"Content-Type":"text/plain"});
-					response.end("Updated\n");
+					response.end(JSON.stringify(raw));
 				});
 			});
 		}
