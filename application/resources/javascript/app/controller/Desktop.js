@@ -47,16 +47,20 @@
 			//var desktopIcons;
 			
 			Ext.Ajax.request({
-				url : Config.path + '/index.php/Desktop_Icon/getDesktopIcons',
+				url : '/DesktopIcons/getDesktopIcons',
 				failure : function(){
 					console.log("Failed");
 				},
 				callback: function(opt, success, response){
-					desktopIcons = Ext.JSON.decode(response.responseText).results;
+					desktopIcons = Ext.JSON.decode(response.responseText).desktop_icons;
 					
+					
+
 					var numOfDesktopIcons = desktopIcons.length;
 			
 					for(icon in desktopIcons){
+						console.log(desktopIcons[icon]);
+						
 						var desktopIcon = Ext.create('controller.DesktopIcon');
 						desktopIcon.createDesktopIcon(desktopIcons[icon]);
 					}
@@ -114,11 +118,11 @@
 				var x = this.el.getXY()[0],
 					y = this.el.getXY()[1];
 				
-				console.log(Config.path);
+				/*console.log(Config.path);
 				
 				Ext.Ajax.request({
 					url : Config.path + '/index.php/Desktop_Icon/setDesktopIconPosition?diid=' + desktopIconId + '&x=' + x + '&y=' + y		
-				});
+				});*/
 			},
 			onDragDrop : function(evtObj, targetElId){
 				var dropEl = Ext.get(targetElId);

@@ -1,3 +1,4 @@
+Ext.namespace("Config");
 Ext.require('Ext.container.Viewport');
 
 Ext.Loader.setConfig({
