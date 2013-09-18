@@ -26,6 +26,24 @@ function DesktopIcons(loader) {
 					
 				});
 
+		},
+		"setDesktopIconPosition" : function(request, response) {
+			var x = request.query.x;
+			var y = request.query.y;
+			var icon_id = request.query.diid;
+
+			var position = { x : x, y : y};
+
+			
+
+			var model = loader.loadModel("DesktopIcons", function(model){
+				model["setDesktopIconPosition"]( request.session.user_id, icon_id, position, function(err, data) {
+					if(err) throw err;
+
+					response.writeHead(200, {"Content-Type":"text/plain"});
+					response.end("Updated\n");
+				});
+			});
 		}
 	};
 

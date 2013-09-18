@@ -118,11 +118,16 @@
 				var x = this.el.getXY()[0],
 					y = this.el.getXY()[1];
 				
-				/*console.log(Config.path);
+				console.log("diid: " + desktopIconId);
+				console.log("x: " + x);
+				console.log("y: " + y);
 				
 				Ext.Ajax.request({
-					url : Config.path + '/index.php/Desktop_Icon/setDesktopIconPosition?diid=' + desktopIconId + '&x=' + x + '&y=' + y		
-				});*/
+					url : '/DesktopIcons/setDesktopIconPosition?diid=' + desktopIconId + '&x=' + x + '&y=' + y,
+					callback: function(opt, success, response){
+						console.log(response.responseText);
+					}
+				});
 			},
 			onDragDrop : function(evtObj, targetElId){
 				var dropEl = Ext.get(targetElId);
