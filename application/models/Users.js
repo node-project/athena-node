@@ -5,25 +5,13 @@
  */
 
 var debug 		= require('../../system/core/core').debug,
-	Model		= require('../../system/lib/model/Model'),
 	model;
 
-function Users(dbclient) {
+function Users(db) {
 	"use strict";
 
-	var schema = {	
-		_id 		: String,
-		password 	: String 
-	};
 
-	var modelName = "users";
-
-	model = new Model(dbclient, schema, modelName);
-
-	var test = new model({
-		name 	: "Egee Boy",
-		lastname: "Gutierrez"
-	});
+	var model = db.collection("users");
 
 	var _method = {
 		"login"		:  function(username, password, callback){

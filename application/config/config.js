@@ -13,5 +13,6 @@ module.exports = exports = {
 		"host" : "localhost",
 		"port" : 27017,
 		"dbname" : "athena"
-	}
+	},
+	"debug" : 1
 };

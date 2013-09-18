@@ -5,57 +5,26 @@
  */
 
 var debug 		= require('../../system/core/core').debug,
-	Model		= require('../../system/lib/model/Model'),
 	model;
 
-function DesktopIcons(dbclient) {
+function DesktopIcons(db) {
 	"use strict";
 
-	var schema = {	
-		_id 		: String,
-		password 	: String ,
-		desktop_icons:  [
-			{
-				_id 	:Number,
-				label 	:String,
-				image 	:String,
-				position : {
-					x : Number,
-					y : Number
-				}
-			}
-		]
-	};
 
-	var modelName = "users";
-
-	model = new Model(dbclient, schema, modelName);
-
-	/*var test = new model({
-		name 	: "Egee Boy",
-		lastname: "Gutierrez"
-	});*/
+	var model = db.collection("users");
 
 	var _method = {
 		"getDesktopIcons"		:  function(user_id, callback){
 			model.findOne({_id : user_id},{"_id" : 0, "desktop_icons" : 1}, callback);
 		},
 		"setDesktopIconPosition" : function(user_id, icon_id, position, callback) {
+			console.log("user_id: " + user_id);
 			console.log("icon_id: " + icon_id);
 			console.log("x: " + position);
 
-			/*var condition = { _id : user_id , "desktop_icons._id" : icon_id};
-			var update = {
-				$set : {
-					"desktop_icons.$.position.x" : position.x,
-					"desktop_icons.$.position.y" : position.y,
-				}
-			};*/
-
-			//model.update({_id : "athena", "desktop_icons._id" : 1}, { $set : { "desktop_icons.$.position" : {x : 100, y : 2354} }}, callback);
 			model.update(
-				{ "_id" : "athena"}, 
-				{ "$set" : { "desktop_icons.$.label" : "athena123"}},
+				{ "_id" : user_id, "desktop_icons._id" : parseInt(icon_id)},
+				{ "$set" : { "desktop_icons.$.position" : position}},
 				{ "multi" : true}, 
 				callback
 			);

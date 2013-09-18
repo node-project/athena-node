@@ -5,7 +5,7 @@
 var fs 		= require('fs'),
 	debug 	= require('../../core/core').debug;
 
-function Loader(dbclient){
+function Loader(db){
 	"user strict";
 
 	var me = this;
@@ -18,7 +18,7 @@ function Loader(dbclient){
 		var controllerName 	= "";
 		var method			= "";
 
-		debug("Fetching parsed segments " + segments);
+		debug("Fetching parsed segments [" + segments + "]");
 
 		for(index = 0; index < segments.length - 2; index++){
 			directory += segments[index] + "/";
@@ -46,7 +46,7 @@ function Loader(dbclient){
 							
 
 							if(typeof method == 'undefined') {
-								debug("Loading default[index] function");
+								debug("Loading default [index] function");
 								method = 'index';
 							}
 							
@@ -80,7 +80,7 @@ function Loader(dbclient){
 							
 
 							if(typeof method == 'undefined') {
-								debug("Loading default[index] function");
+								debug("Loading default [index] function");
 								method = 'index';
 							}
 							
@@ -115,7 +115,7 @@ function Loader(dbclient){
 					
 
 					if(typeof method == 'undefined') {
-						debug("Loading default[index] function");
+						debug("Loading default [index] function");
 						method = 'index';
 					}
 					
@@ -143,7 +143,7 @@ function Loader(dbclient){
 
 		var segments = modelName.split("/");
 
-		debug("Fetching parsed segments " + segments);
+		debug("Fetching parsed segments [" + segments + "]");
 
 		for(index = 0; index < segments.length - 2; index++){
 			directory += segments[index] + "/";
@@ -168,7 +168,7 @@ function Loader(dbclient){
 							var Model = require('../../../application/models/' + directory + modelName);
 
 							
-							model = new Model(dbclient);
+							model = new Model(db);
 							callback(model);
 							
 							debug("Done");
@@ -193,7 +193,7 @@ function Loader(dbclient){
 					var Model = require('../../../application/models/' + directory + modelName);
 
 					
-					model = new Model(dbclient);
+					model = new Model(db);
 					callback(model);
 					debug("Done");
 

@@ -6,10 +6,10 @@ var Loader 	= require('../loader/loader'),
 var loader,
 	uri 	= new URI();
 
-function routeController(app, dbclient) {
+function routeController(app, db) {
 	debug("Starting router.");
 	
-	loader = new Loader(dbclient);
+	loader = new Loader(db);
 
 	app.all(
 		"/*",

@@ -4,7 +4,8 @@ var http 	= require("http"),
 	app 	= express(),
 	cons 	= require('consolidate'),
 	path 	= require('path'),
-	mongoose = require('mongoose'),
+	MongoClient = require('mongodb').MongoClient,
+	Server = require('mongodb').Server,
 	debug 	= require('./core/core').debug,
 	appConfig 	= require("../application/config/config");
 
@@ -14,12 +15,13 @@ function start(route) {
 	var port = appConfig.database.port;
 	var dbname = appConfig.database.dbname;
 
-	mongoose.connect('mongodb://' + host + ':' + port + '/' + dbname);
-	
-	var db = mongoose.connection;
+	var mongoclient = new MongoClient( new Server(host, port, { 'native_parser' : true}) );
+	var db = mongoclient.db(dbname);
 
-	db.on('error', console.error.bind(console, 'connection error:'));
-	db.once('open', function callback () {
+	mongoclient.open(function (err, mongoclient){
+
+		if(err) throw err;
+
 		app.use(express.cookieParser());
 		app.use(express.session({secret: '1234567890QWERTY'}));
 
@@ -33,13 +35,23 @@ function start(route) {
 		app.use(app.router);
 
 		
-		route(app, mongoose);
+		route(app, db);
 
 		app.listen(8888);
 
 		
 		debug("Starting server from port 8888");
 	});
+
+	
+	/*mongoose.connect('mongodb://' + host + ':' + port + '/' + dbname);
+	
+	var db = mongoose.connection;
+
+	db.on('error', console.error.bind(console, 'connection error:'));
+	db.once('open', function callback () {
+		
+	});*/
 	
 }
 

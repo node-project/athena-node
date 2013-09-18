@@ -32,7 +32,7 @@ function DesktopIcons(loader) {
 			var y = request.query.y;
 			var icon_id = request.query.diid;
 
-			var position = { x : x, y : y};
+			var position = { x : parseInt(x), y : parseInt(y)};
 
 			
 

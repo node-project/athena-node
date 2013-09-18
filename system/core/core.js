@@ -3,6 +3,7 @@
  * @version  1.0
  * @class Core handles core config
  */
+var appConfig 	= require("../../application/config/config");
 
 module.exports = exports = {
 	"debug" : function(message) {
@@ -11,7 +12,9 @@ module.exports = exports = {
 
 		var format = "[" + now + "]\t" + message;
 
-		console.log(format);
+		if(appConfig.debug) {
+			console.log(format);
+		}
 	}
 };
 
