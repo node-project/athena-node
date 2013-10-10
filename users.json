@@ -1,0 +1,25 @@
+{ 
+	"_id" : "athena", 
+	"desktop_icons" : [ 
+		{ 
+			"_id" 		: 1, 
+			"label" 	: "Chat",
+			"alias"		: "chat",
+			"image" 	: "/desktop-icons/chat-icon.png", 
+			"position" 	: { "x" : 35, "y" : 109 } 
+		}, { 
+			"_id" 		: 2, 
+			"label" 	: "Mail", 
+			"alias"		: "mail",
+			"image" 	: "/desktop-icons/mail-icon.png", 
+			"position" 	: { "x" : 45, "y" : 5 } 
+		}, { 
+			"_id" 		: 3, 
+			"label" 	: "Tickets",
+			"alias"		: "tickets",
+			"image" 	: "/desktop-icons/ticket-icon.png", 
+			"position" 	: { "x" : 1082, "y" : 198 } 
+		}
+	], 
+	"password" : "athena123" 
+}
